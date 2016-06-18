@@ -2,7 +2,6 @@ import sbt._
 import Keys._
 import xml.Group
 import sbtbuildinfo.Plugin._
-import com.typesafe.sbt.SbtStartScript
 import MimaSettings.mimaSettings
 import com.typesafe.tools.mima.plugin.MimaKeys.previousArtifacts
 import com.typesafe.sbt.JavaVersionCheckPlugin.autoImport._
@@ -138,7 +137,7 @@ object build extends Build {
   lazy val examples = Project(
      id = "json4s-examples",
      base = file("examples"),
-     settings = json4sSettings ++ SbtStartScript.startScriptForClassesSettings ++ noPublish
+     settings = json4sSettings ++ noPublish
   ) dependsOn(
     core % "compile;test->test",
     native % "compile;test->test",
@@ -177,7 +176,7 @@ object build extends Build {
   lazy val benchmark = Project(
     id = "json4s-benchmark",
     base = file("benchmark"),
-    settings = json4sSettings ++ SbtStartScript.startScriptForClassesSettings ++ Seq(
+    settings = json4sSettings ++ Seq(
       cancelable := true,
       libraryDependencies ++= Seq(
         "com.google.code.java-allocation-instrumenter" % "java-allocation-instrumenter" % "3.0",
